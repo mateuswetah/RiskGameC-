@@ -124,7 +124,7 @@ void Fortification::fortify()
 
 	// List the territories that migrate 
 	std::vector<Territory*> allTerritories = map->getTerritories();		// Map's territories
-	std::vector<Territory*> pTerritories;								// Player's territories
+	std::vector<Territory*> pTerritories = map->getTerritoriesByPlayer(mCurrent->getName());								// Player's territories
 
 	std::vector <std::string> tempOriginStr1;
 	std::vector <std::string> tempDestinationStr1;

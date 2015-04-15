@@ -12,6 +12,7 @@ Continent::Continent()
 {
 	name = "";
 	color = "green"; // default
+	bonus = 1;
 	//territories = NULL;
 	notify();
 }
