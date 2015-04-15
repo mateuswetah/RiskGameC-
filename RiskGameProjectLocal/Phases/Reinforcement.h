@@ -2,13 +2,13 @@
 #include "../Cards/Card.h"
 #include "../Player/Player.h"
 #include "../Map/Map.h"
+#include "Phase.h"
 
-
-class Reinforcement
+class Reinforcement :public Phase
 {
 public:
 	// Constructor
-	Reinforcement(Player* p, int cardBonusCt);
+	Reinforcement(int ct);
 	virtual ~Reinforcement();
 	
 	// Others
@@ -24,6 +24,7 @@ public:
 	int updateCardBonus();
 	void updatePDeck(Card* exchangeSet[3]/*c1, Card* c2, Card* c3*/, std::vector<Card*> cards);
 	void placeReinforcement();
+	void run(Player* player);
 
 private:
 	// Attributes

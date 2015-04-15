@@ -273,4 +273,87 @@ Battle::setAttacker (Territory* attacker)
   mAttacker = attacker;
 }
 
+void
+Battle::run(Player* player)
+{
+  Map *map = Map::getMapInstance();
+  map->getStatsNotifier()->setStatusMessage("Battle!");
+
+  bool endTurn = false;
+  char choice;
+
+  while (!endTurn)
+  {
+  		std::cout  << "What would you like to do?" << std::endl
+
+  		    << "1 - Normal Attack" << std::endl <<
+		    "2 - AllOutAttack"<< std::endl <<
+		    "3 - End Turn" << std::endl;
+
+  if (player->getName() == "AI")
+  {
+  AIPlayer *AI = (AIPlayer*) player;
+
+  choice = AI->decideAttack();
+  std::cout << choice << std::endl;
+  }
+  else
+  std::cin >> choice;
+  switch (choice)
+  {
+  case '1':
+  			// Notify Status
+      map->getStatsNotifier()->setStatusMessage("Battle - Normal Attack");
+
+      RunBattle(false, player);
+      break;
+
+  case '2':
+  			// Notify Status
+	map->getStatsNotifier()->setStatusMessage("Battle - All Out Attack");
+
+  	RunBattle(true, player);
+  	break;
+  default:
+  			// Notify Status
+	map->getStatsNotifier()->setStatusMessage("Battle - End Turn");
+
+	endTurn = true;
+
+  }
+  std::cin.get();
+
+  	/*	for (unsigned int i = 0; i < map->getTerritories().size(); i++)
+  {
+  			std::cout  << map->getTerritories().at(i)->getName() << " "
+
+  << map->getTerritories().at(i)->getPlayerOwner()->getName()
+  << std::endl;
+  }*/
+
+
+  } // End of the Battle Loop
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -1,9 +1,9 @@
 #include "Fortification.h"
 
-Fortification::Fortification(Player* aPlayer)
+Fortification::Fortification()
 {
 	std::cout << "Fortification phase!\n\n";
-	mCurrent = aPlayer;
+	//mCurrent = aPlayer;
 	tOriginStr = "";
 	tDestinationStr = "";
 }
@@ -215,4 +215,17 @@ void Fortification::setTDestination(std::string aTerritory)
 {
 	Map *map = Map::getMapInstance();
 	tDestination = map->getTerritoryByName(aTerritory);
+}
+
+void
+Fortification::run(Player* player)
+{
+  mCurrent = player;
+  if (mCurrent->getHasNewTerritory())
+  {
+	  fortify();
+	  // New risk card
+	  std::cout << "Player receives a new Risk card!" << std::endl;
+	  mCurrent->addCard(GameDeck::getGameDeckInstance()->drawCard());
+  }
 }

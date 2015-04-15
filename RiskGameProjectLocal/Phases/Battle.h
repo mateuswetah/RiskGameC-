@@ -16,13 +16,14 @@
 #include "../Map/Map.h"
 #include "../Player/Player.h"
 #include "../Player/AIPlayer.h"
+#include "Phase.h"
 
 #include "time.h"
 #include <algorithm>
 #include <stdlib.h>
 #include <functional>
 
-class Battle
+class Battle :public Phase
 {
 public:
   Battle ();
@@ -34,6 +35,8 @@ public:
   void RollDices(bool allin);
   void setDeffender (Territory* deffender);
   void setAttacker (Territory* attacker);
+
+  void run(Player* player);
 
 private:
   Map*	mMap;

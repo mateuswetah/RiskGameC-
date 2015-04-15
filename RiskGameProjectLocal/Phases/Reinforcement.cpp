@@ -1,10 +1,10 @@
 #include "Reinforcement.h"
 
-Reinforcement::Reinforcement(Player* p, int c)
+Reinforcement::Reinforcement(int ct)
 {
 	std::cout << "Reinforcement Phase.\n";
-	mCurrent = p;
-	cardBonusCt = c;
+	//mCurrent = p;
+	cardBonusCt = ct;
 	exchange = false;
 	numOfR = 0;
 }
@@ -281,3 +281,27 @@ void Reinforcement::placeReinforcement()
 
 	}
 }
+
+void
+Reinforcement::run(Player* player)
+{
+    Map::getMapInstance()->getStatsNotifier()->setStatusMessage("Reinforcement");
+    reinforce();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
