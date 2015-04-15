@@ -9,11 +9,16 @@ Reinforcement::Reinforcement(Player* p, int c)
 	numOfR = 0;
 }
 
+Reinforcement::~Reinforcement()
+{
+	delete mCurrent;
+}
+
 void Reinforcement::countTerritories()
 {
-	std::cout << "Counting the number of territories.\n";
+	std::cout << "Counting the number of territories..\n";
 	int count = mCurrent->getNTerritory();
-	std::cout << "Num = " << count << std::endl;
+	//std::cout << "Num = " << count << std::endl;
 	count = (int)floor(count / 3);
 	if (count >= 3)
 		numOfR += count;
@@ -25,8 +30,7 @@ void Reinforcement::countTerritories()
 
 void Reinforcement::countContinents()
 {
-	std::cout << "Counting the number of continents.\n";
-
+	std::cout << "Counting the number of continents...\n";
 	// Entire territory info
 	Map *map = Map::getMapInstance();
 	std::vector<Continent*> continents = map->getContinents();
@@ -88,10 +92,11 @@ bool Reinforcement::checkMinCondition()
 
 void Reinforcement::countCards()
 {
+	std::cout << "Counting the number of cards..\n";
 	std::vector<Card*> cards = mCurrent->getCards();
 	int numOfCard = mCurrent->getNCard();
 	std::cout << "NumOfCards = " << numOfCard << std::endl;
-	std::cout << "WTF" << std::endl;
+
 	bool meetConditions = checkMinCondition();
 	
 	if (numOfCard >= 5)
@@ -231,9 +236,12 @@ void Reinforcement::reinforce()
 
 	/* Assign the number of reinforcements to the current player */
 	mCurrent->setNReinforcement(numOfR);
-	
 	mCurrent->notify();
-	std::cout << "End REiNFORCEMENT\n";
+
+	/* Distribute army */
+	placeReinforcement();
+
+	std::cout << "End of Reinforcement" << std::endl;
 }
 
 int Reinforcement::updateCardBonus()
@@ -241,4 +249,35 @@ int Reinforcement::updateCardBonus()
 	if (exchange)
 		cardBonusCt += 5;
 	return cardBonusCt;
+}
+
+void Reinforcement::placeReinforcement()
+{
+	std::cout << "Place Reinforcements" << std::endl;
+
+	Map *map = Map::getMapInstance();
+
+	while (mCurrent->getNReinforcement() > 0)
+	{
+
+		std::cout << mCurrent->getName() << ", "	<< mCurrent->getNReinforcement()
+		<< " reinforcements remaining, select a country.\n";
+		std::string territory;
+		getline(std::cin, territory);
+
+		if (map->getTerritoryByName(territory)->getPlayerOwner() == mCurrent)
+		{
+			map->getTerritoryByName(territory)->setAmountOfArmies(
+				map->getTerritoryByName(territory)->getAmountOfArmies()	+ 1);
+			mCurrent->setNReinforcement(mCurrent->getNReinforcement() - 1);
+			std::cout << territory << " has now " << map->getTerritoryByName(territory)->getAmountOfArmies() << " armies.\n";
+		}
+		
+	}
+
+	if (mCurrent->getName() == "AI")
+	{
+
+
+	}
 }

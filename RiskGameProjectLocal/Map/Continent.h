@@ -10,7 +10,7 @@
 
 #include <vector>
 #include "Territory.h"
-#include "Observable.h" // ALREADY IN TERRITORY.H 
+#include "../ObservablePattern/Observable.h" // ALREADY IN TERRITORY.H
 
 /* Added to fixe circular dependency problem */
 class Territory;

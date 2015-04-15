@@ -11,8 +11,8 @@
 #include "SFML/Graphics.hpp"
 #include <vector>
 #include <iostream>
-#include "../Map/Observer.h"
-#include "Player.h"
+#include "../ObservablePattern/Observer.h"
+#include "../Player/Player.h"
 #include <sstream>
 #include "../Map/Map.h"
 

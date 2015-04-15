@@ -5,7 +5,7 @@
  *      Author: Emmanuel
  */
 
-#include "MapIO.h"
+#include "../FileIO/MapIO.h"
 
 MapIO::MapIO ()
 {
@@ -156,7 +156,7 @@ void MapIO::loadMapInfo (std::string filename)
 
 
 			  for (int i = 0; i < aTerritoryNeighbors.size(); i++)
-			  {
+				{
 
 				  if (mMap->getTerritoryByName(aTerritoryNeighbors.at(i))->getName() == "Limbo" )
 				{
@@ -169,7 +169,7 @@ void MapIO::loadMapInfo (std::string filename)
 				{
 				  territoryObject->addNewNeighbor(mMap->getTerritoryByName(aTerritoryNeighbors.at(i)));
 				}
-			  }
+				}
 
 			  territoryObject->setName(aTerritoryName);
 			  territoryObject->setPosX(atoi(aTerritoryPosX.c_str()));

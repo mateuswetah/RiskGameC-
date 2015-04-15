@@ -9,6 +9,7 @@ class Reinforcement
 public:
 	// Constructor
 	Reinforcement(Player* p, int cardBonusCt);
+	virtual ~Reinforcement();
 	
 	// Others
 	void countTerritories();
@@ -22,6 +23,7 @@ public:
 	bool uniqueType(Card* exchangeSet[3]);
 	int updateCardBonus();
 	void updatePDeck(Card* exchangeSet[3]/*c1, Card* c2, Card* c3*/, std::vector<Card*> cards);
+	void placeReinforcement();
 
 private:
 	// Attributes

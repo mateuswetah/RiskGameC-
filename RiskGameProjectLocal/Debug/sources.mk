@@ -27,7 +27,6 @@ Player/Strategies \
 Player \
 Map \
 Map/MapIO \
-Map/MapCreator \
 Driver \
 Cards \
 Battle \

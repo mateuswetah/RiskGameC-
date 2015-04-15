@@ -11,7 +11,6 @@ RM := rm -rf
 -include Player/Strategies/subdir.mk
 -include Player/subdir.mk
 -include Map/MapIO/subdir.mk
--include Map/MapCreator/subdir.mk
 -include Map/subdir.mk
 -include Driver/subdir.mk
 -include Cards/subdir.mk

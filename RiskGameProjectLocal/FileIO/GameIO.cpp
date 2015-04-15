@@ -5,7 +5,7 @@
  *      Author: Emmanuel
  */
 
-#include "GameIO.h"
+#include "../FileIO/GameIO.h"
 
 GameIO::GameIO ()
 {
