@@ -35,8 +35,9 @@ void MapViewer::update()
 
 	loadMapImage(this->observedMap->getFileName());
 	drawAllNeighborsLines();
-	drawAllContinentOwners();
 	drawContinentInfoBar();
+	drawAllContinentOwners();
+
 	//window->display();
 
 }

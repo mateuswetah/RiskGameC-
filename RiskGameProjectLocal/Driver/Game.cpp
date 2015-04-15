@@ -124,14 +124,14 @@ void Game::graphics(std::string mapFileName)
 		window.create(
 				sf::VideoMode(mapBackground.getSize().x,
 						mapBackground.getSize().y + 100), "RISK! - " + mapFileName ,
-						sf::Style::Default, settings);
+						sf::Style::Titlebar, settings);
 	else
 		window.create(
 				sf::VideoMode(
 						mapBackground.getSize().x
 						+ (900 - mapBackground.getSize().x),
 						mapBackground.getSize().y + 100), "RISK! - " + mapFileName,
-						sf::Style::Default, settings);
+						sf::Style::Titlebar, settings);
 
 	window.clear(sf::Color(45, 45, 45));
 
