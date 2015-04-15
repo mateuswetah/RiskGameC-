@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include "../Cards/Card.h"
-#include "../Map/Observable.h"
+#include "../ObservablePattern/Observable.h"
 #include "../Map/Map.h"
 
 class Player : public Observable

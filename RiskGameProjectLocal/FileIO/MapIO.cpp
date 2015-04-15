@@ -5,7 +5,7 @@
  *      Author: Emmanuel
  */
 
-#include "MapIO.h"
+#include "../FileIO/MapIO.h"
 
 MapIO::MapIO ()
 {

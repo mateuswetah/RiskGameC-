@@ -7,7 +7,7 @@
 
 #ifndef MAP_MAPIO_GAMEIO_H_
 #define MAP_MAPIO_GAMEIO_H_
-#include "../Map.h"
+#include "../Map/Map.h"
 #include <string>
 #include <vector>
 

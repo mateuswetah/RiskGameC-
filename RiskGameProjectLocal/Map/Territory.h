@@ -9,7 +9,7 @@
 #define TERRITORY_H_
 
 #include "../Player/Player.h"
-#include "Observable.h"
+#include "../ObservablePattern/Observable.h"
 #include <string>
 #include <vector>
 

@@ -5,7 +5,7 @@
  *      Author: Emmanuel
  */
 
-#include "GameToMapIO.h"
+#include "../FileIO/GameToMapIO.h"
 
 GameToMapIO::GameToMapIO (MapIO mio)
 {

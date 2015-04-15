@@ -8,8 +8,8 @@
 #ifndef MAPVIEWER_H_
 #define MAPVIEWER_H_
 
-#include "Observer.h"
-#include "Map.h"
+#include "../ObservablePattern/Observer.h"
+#include "../Map/Map.h"
 
 #include "SFML/Graphics.hpp"
 #include <vector>

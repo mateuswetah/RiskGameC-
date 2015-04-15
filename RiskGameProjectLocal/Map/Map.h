@@ -19,8 +19,8 @@
 #include <stdlib.h>
 
 #include "Continent.h"
-#include "Observable.h" // ALREADY IN TERRITORY.H, CONTINENT.H
-#include "MapIO/MapIO.h"
+#include "../ObservablePattern/Observable.h" // ALREADY IN TERRITORY.H, CONTINENT.H
+#include "../FileIO/MapIO.h"
 
 /* Added to fixe circular dependency problem */
 class Continent;

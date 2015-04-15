@@ -2,23 +2,23 @@
 #define GAME_H_
 
 #include "../Map/Map.h"
-#include "../Map/MapViewer.h"
-#include "../Map/PlayerViewer.h"
+#include "../Viewers/MapViewer.h"
+#include "../Viewers/PlayerViewer.h"
 #include "../Player/Player.h"
-#include "../Player/StatisticsViewer.h"
+#include "../Viewers/StatisticsViewer.h"
 #include "../Player/AIPlayer.h"
 #include "../Cards/GameDeck.h"
-#include "Reinforcement.h"
 #include <math.h>
 
 #include <stdlib.h>
-#include "../Battle/Battle.h"
-#include "StatusNotifier.h"
+#include "../Phases/Battle.h"
+#include "../Phases/Reinforcement.h"
+#include "../Phases/Fortification.h"
+#include "../Viewers/StatusNotifier.h"
 
 #include <SFML/Graphics.hpp>
-#include "Fortification.h"
-#include "../Map/MapIO/GameIO.h"
-#include "../Map/MapIO/GameToMapIO.h"
+#include "../FileIO/GameIO.h"
+#include "../FileIO/GameToMapIO.h"
 #include "../Map/MapCreator/MapCreator.h"
 
 class Game

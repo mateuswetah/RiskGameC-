@@ -8,9 +8,9 @@
 #ifndef PLAYERVIEWER_H_
 #define PLAYERVIEWER_H_
 
-#include "Observer.h"
+#include "../ObservablePattern/Observer.h"
 #include "SFML/Graphics.hpp"
-#include "Map.h"
+#include "../Map/Map.h"
 #include <iostream>
 #include <vector>
 

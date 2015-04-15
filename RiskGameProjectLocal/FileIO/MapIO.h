@@ -8,7 +8,7 @@
 #ifndef MAP_MAPIO_MAPIO_H_
 #define MAP_MAPIO_MAPIO_H_
 
-#include "../Map.h"
+#include "../Map/Map.h"
 #include <string>
 #include <vector>
 
