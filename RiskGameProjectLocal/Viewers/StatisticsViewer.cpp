@@ -35,7 +35,7 @@ void StatisticsViewer::update()
 	this->observedPlayer->defineNTerritory();
 	this->observedPlayer->defineNCard();
 	this->observedPlayer->defineNArmy();
-	this->observedPlayer->defineNReinforcement();
+	//this->observedPlayer->defineNReinforcement();
 
 	// Update viewer
 	bottomBar->clear(sf::Color(45, 45, 45)); /// Background Color

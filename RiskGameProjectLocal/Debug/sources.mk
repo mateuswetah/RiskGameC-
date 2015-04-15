@@ -23,11 +23,14 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+Viewers \
 Player/Strategies \
 Player \
+Phases \
+ObservablePattern \
 Map \
-Map/MapIO \
+Map/MapCreator \
+FileIO \
 Driver \
 Cards \
-Battle \
 

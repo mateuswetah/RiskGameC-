@@ -8,13 +8,16 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include Viewers/subdir.mk
 -include Player/Strategies/subdir.mk
 -include Player/subdir.mk
--include Map/MapIO/subdir.mk
+-include Phases/subdir.mk
+-include ObservablePattern/subdir.mk
+-include Map/MapCreator/subdir.mk
 -include Map/subdir.mk
+-include FileIO/subdir.mk
 -include Driver/subdir.mk
 -include Cards/subdir.mk
--include Battle/subdir.mk
 -include subdir.mk
 -include objects.mk
 

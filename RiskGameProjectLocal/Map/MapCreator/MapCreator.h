@@ -12,9 +12,8 @@
 #include "../Continent.h"
 #include "../Territory.h"
 
-#include "../MapViewer.h"
-
-#include "../MapIO/MapIO.h"
+#include "../../Viewers/MapViewer.h"
+#include "../../FileIO/MapIO.h"
 
 #include <SFML/Graphics.hpp>
 #include <string>
