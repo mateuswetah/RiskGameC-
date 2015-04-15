@@ -27,6 +27,12 @@ public:
 	// destructor
 	virtual ~Continent();
 
+	// Copy Constructor
+	Continent (const Continent& other);
+
+	// Assignment Operator
+	Continent& operator=(const Continent& other);
+
 	// getter
 	std::vector<Territory*> getTerritories();
 

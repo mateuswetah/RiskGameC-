@@ -62,14 +62,14 @@ void MapCreator::mapCreatorGraphics()
 		window.create(
 		sf::VideoMode(mapBackground.getSize().x,
 		mapBackground.getSize().y + 100), "RISK! - MAP CREATOR ",
-		sf::Style::Default, settings);
+		sf::Style::Titlebar, settings);
 	else
 		window.create(
 		sf::VideoMode(
 		mapBackground.getSize().x
 		+ (900 - mapBackground.getSize().x),
 		mapBackground.getSize().y + 100), "RISK! - MAP CREATOR",
-		sf::Style::Default, settings);
+		sf::Style::Titlebar, settings);
 
 	window.clear(sf::Color(45, 45, 45));
 
@@ -221,12 +221,11 @@ void MapCreator::territoryEditorMenu(std::string territory)
 			for (int i = 0; i < nNeighbors; i++)
 			{
 				std::cout << "Name of the neighbor " << i + 1 << ": " << std::endl;
-				std::cin.ignore();
 				std::getline(std::cin, oneNeighbor);
 
 				while (!newMap->checkIfTerritoryExists(oneNeighbor))
 				{
-					std::cerr << "There is no Territory with this name in the map! "	<< std::endl;
+					std::cerr << "There is no Territory named " << oneNeighbor << " in the map! "	<< std::endl;
 					std::cout << "Please type the name of an existing one:		   " 	<< std::endl;
 					std::cin.ignore();
 					std::getline(std::cin, oneNeighbor);
@@ -262,7 +261,7 @@ void MapCreator::territoryEditorMenu(std::string territory)
 		case 4:
 			std::cout << "You are editing " << territory << std::endl;
 			std::cout << "Which is in the coordinates (" << tmp->getPosX() << ", " << tmp->getPosY() << ")" << std::endl;
-			std::cout << "These are it's the current Neighbors" << std::endl;
+			std::cout << "These are it's current Neighbors" << std::endl;
 			tmp->printMyNeighbors();
 
 		break;
@@ -285,7 +284,7 @@ void MapCreator::territoryEditorMenu(std::string territory)
 				std::getline(std::cin, newContinentName);
 			}
 
-			// Analyse this!
+			// Look for which continent territory currently belongs too
 			for (int i = 0; i < newMap->getContinents().size(); i++)
 			{
 				if (newMap->getContinents().at(i)->getTerritoryByName(territory)->getName() != "Limbo")
@@ -420,7 +419,7 @@ void MapCreator::removeContinents()
 {
 	std::string continentName;
 
-	std::cout << "Name of the continent to be removed from the map: " ;
+	std::cout << "Name of the continent to be removed from the map: (remember, this will remove it's territories too) " ;
 	std::cin.clear();
 	std::cin.get();
 	std::getline(std::cin, continentName);
@@ -458,7 +457,13 @@ void MapCreator::removeTerritories()
 		std::getline(std::cin, territoryName);
 	}
 
-	newMap->removeTerritory(newMap->getTerritoryByName(territoryName));
+	// Look for which continent territory currently belongs too
+	for (unsigned int i = 0; i < newMap->getContinents().size(); i++)
+	{
+		if (newMap->getContinents().at(i)->getTerritoryByName(territoryName)->getName() != "Limbo")
+			newMap->getContinents().at(i)->removeTerritory(newMap->getContinents().at(i)->getTerritoryByName(territoryName));
+
+	}
 
 	MapObserver = new MapViewer(newMap, window);
 

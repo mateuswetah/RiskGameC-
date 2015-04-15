@@ -21,12 +21,14 @@ class Territory : public Observable
 
 public:
 
-	// constructors and destructor
+	// Constructors and Destructor
 	Territory();
-
 	Territory(std::string name, std::vector<Territory*> neightbors, int posX, int PosY, Player* player, int armies);
-
 	virtual ~Territory();
+	// Copy Constructor
+	Territory (const Territory& other);
+	// Assignment Operator
+	Territory& operator=(const Territory& other);
 
 	// getters
 	std::string getName();

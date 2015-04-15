@@ -40,6 +40,36 @@ Territory::~Territory()
 
 }
 
+// Copy Constructor
+Territory::Territory (const Territory& other)
+				: neighbors(other.neighbors.size()),
+				  name(other.name), mPosX(other.mPosX),
+				  mPosY(other.mPosY), amountOfArmies(other.amountOfArmies),
+				  playerOwner(NULL)
+{
+
+	if (playerOwner)
+		playerOwner = new Player(*other.playerOwner);
+
+	for (std::size_t i = 0; i < other.neighbors.size(); i++)
+		neighbors[i] = new Territory(*other.neighbors[i]);
+
+}
+// Assignment Operator
+Territory& Territory::operator=(const Territory& other)
+{
+
+	name = other.name;
+	mPosX = other.mPosX;
+	mPosY = other.mPosY;
+	amountOfArmies = other.amountOfArmies;
+	playerOwner = new Player(*other.playerOwner);
+
+	for (std::size_t i = 0; i < other.neighbors.size(); i++)
+			neighbors[i] = new Territory(*other.neighbors[i]);
+
+	return *this;
+}
 
 // getters --------------------------------------------------------
 std::string Territory::getName()

@@ -38,6 +38,12 @@ public:
 
 	Map(std::vector<Continent*> continents);
 
+	// Copy Constructor
+	Map (const Map& other);
+
+	// Assignment Operator
+	Map& operator=(const Map& other);
+
 	// destructor
 	virtual ~Map();
 

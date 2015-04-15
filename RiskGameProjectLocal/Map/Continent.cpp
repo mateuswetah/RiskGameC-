@@ -28,6 +28,31 @@ Continent::~Continent()
 	this->territories.clear();
 }
 
+// Copy Constructor
+Continent::Continent (const Continent& other)
+				: territories(other.territories.size()), name(other.name),
+				  color(other.color), bonus(other.bonus)
+{
+
+	for (std::size_t i = 0; i < other.territories.size(); i++)
+		territories[i] = new Territory(*other.territories[i]);
+
+}
+
+// Assignment Operator
+Continent& Continent::operator=(const Continent& other)
+{
+
+	name = other.name;
+	color = other.color;
+	bonus = other.bonus;
+
+	for (std::size_t i = 0; i < other.territories.size(); i++)
+			territories[i] = new Territory(*other.territories[i]);
+
+	return *this;
+}
+
 // getter ---------------------------------------------------------
 std::vector<Territory*> Continent::getTerritories()
 {

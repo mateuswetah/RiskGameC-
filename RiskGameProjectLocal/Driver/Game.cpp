@@ -4,7 +4,6 @@
 Game::Game()
 {
 	menu();
-
 }
 
 Game::~Game()
@@ -16,8 +15,8 @@ void Game::menu()
 {
 	bool exit = false;
 
-	while (!exit)
-	{
+    while (!exit)
+    {
 		std::cout << ">>#>>#>>#>>#>>#>>#>>-- RISK! --<<#<<#<<#<<#<<#<<#<<"	<< std::endl;
 		std::cout << "--^--^--^--^--^--^--^--^--^--^--^--^--^--^--^--^--"	<< std::endl;
 		std::cout << "                                                  "	<< std::endl;
@@ -76,11 +75,11 @@ void Game::menu()
 
 			break;
 		case 4:
+			window.close();
 			exit = true;
 			return;
 		}
-	}
-
+    }
 }
 
 
@@ -122,14 +121,14 @@ void Game::graphics(std::string mapFileName)
 		window.create(
 		sf::VideoMode(mapBackground.getSize().x,
 		mapBackground.getSize().y + 100), "RISK! - " + mapFileName ,
-		sf::Style::Default, settings);
+		sf::Style::Titlebar, settings);
 	else
 		window.create(
 		sf::VideoMode(
 		mapBackground.getSize().x
 		+ (900 - mapBackground.getSize().x),
 		mapBackground.getSize().y + 100), "RISK! - " + mapFileName,
-		sf::Style::Default, settings);
+		sf::Style::Titlebar, settings);
 
 	window.clear(sf::Color(45, 45, 45));
 
@@ -447,7 +446,7 @@ void Game::battle()
 				<< "1 - Normal Attack" << std::endl << "2 - AllOutAttack"
 				<< std::endl << "3 - End Turn" << std::endl;
 
-		if (players[ct]->getName() == "AI")
+		if (players[ct] == 0)
 		{
 			AIPlayer *AI = (AIPlayer*) players[ct];
 
