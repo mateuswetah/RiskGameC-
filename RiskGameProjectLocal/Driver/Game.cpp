@@ -149,8 +149,8 @@ void Game::graphics(std::string mapFileName)
 	}
 
 	// Creates the Status Bar for notifying each stage of the game.
-	statusNotifier = new StatusNotifier(window);
-	statusNotifier->setStatusMessage("Map Loaded Successfully");
+	map->setStatsNotifier(new StatusNotifier(window));
+	map->getStatsNotifier()->setStatusMessage("Map Loaded Successfully");
 
 	window.display();
 }
@@ -158,7 +158,7 @@ void Game::graphics(std::string mapFileName)
 void Game::createPlayer()
 {
 	// Notify Status
-	statusNotifier->setStatusMessage("Creating Players");
+	map->getStatsNotifier()->setStatusMessage("Creating Players");
 
 	// Coloring the players (max 6)
 	std::string c[] = { "blue", "red", "green", "cyan", "magenta", "yellow" };
@@ -237,7 +237,7 @@ int Game::assignArmy()
 void Game::placeArmy()
 {
 	// Notify Status
-	statusNotifier->setStatusMessage("Distributing armies");
+	map->getStatsNotifier()->setStatusMessage("Distributing armies");
 
 	std::cout << "Now it's the distributing armies phase." << std::endl;
 	//ct = first;
@@ -285,7 +285,7 @@ void Game::placeArmy()
 void Game::pickRandom()
 {
 	// Notify Status
-	statusNotifier->setStatusMessage("Pick Random");
+	map->getStatsNotifier()->setStatusMessage("Pick Random");
 
 	std::cout << "Pick Random.\n\n";
 
@@ -365,7 +365,7 @@ void Game::mainPlay()
 	std::cout << "Let's start the game...\n\n";
 
 	// Notify Status
-	statusNotifier->setStatusMessage("Let's Start the Game!");
+	map->getStatsNotifier()->setStatusMessage("Let's Start the Game!");
 
 	int test = 5;
 	ct = first;
@@ -396,20 +396,20 @@ void Game::mainPlay()
 ////////  Reinforcement  //////// 
 void Game::reinforcement()
 {
-	// Notify Status
-	statusNotifier->setStatusMessage("Reinforcement");
-
-	Reinforcement rPhase(players[ct], cardReinforcement);
-	rPhase.reinforce();
-	cardReinforcement = rPhase.updateCardBonus();
+  mPhase = new Reinforcement(cardReinforcement);
+  mPhase->run(players[ct]);
+  cardReinforcement = ((Reinforcement*)mPhase)->updateCardBonus();
 }
 
 
 ////////  Battle  ////////
 void Game::battle()
 {
-	// Notify Status
-	statusNotifier->setStatusMessage("Battle!");
+  mPhase = new Battle();
+  mPhase->run(players[ct]);
+}
+/*	// Notify Status
+statusNotifier->setStatusMessage("Battle!");
 
 	bool endTurn = false;
 	char choice;
@@ -437,20 +437,20 @@ void Game::battle()
 		{
 		case '1':
 			// Notify Status
-			statusNotifier->setStatusMessage("Battle - Normal Attack");
+		      map->getStatsNotifier()->setStatusMessage("Battle - Normal Attack");
 
 			b.RunBattle(false, players[ct]);
 			break;
 
 		case '2':
 			// Notify Status
-			statusNotifier->setStatusMessage("Battle - All Out Attack");
+  map->getStatsNotifier()->setStatusMessage("Battle - All Out Attack");
 
 			b.RunBattle(true, players[ct]);
 			break;
 		default:
 			// Notify Status
-			statusNotifier->setStatusMessage("Battle - End Turn");
+  map->getStatsNotifier()->setStatusMessage("Battle - End Turn");
 
 			endTurn = true;
 
@@ -469,24 +469,29 @@ void Game::battle()
 		{
 			std::cout << "No winner yet." << std::endl;
 		}
+<< map->getTerritories().at(i)->getPlayerOwner()->getName()
+<< std::endl;
+}
 
 	} // End of the Battle Loop
 }
 
+*/
 
 ////////  Fortification  ////////
 void Game::fortification()
 {
-
-	if (players[ct]->getHasNewTerritory())
+	mPhase = new Fortification();
+	mPhase->run(players[ct]);
+	/*if (players[ct]->getHasNewTerritory())
 	{
 		Fortification f(players[ct]);
 		f.fortify();
-
+	
 		// New risk card
 		std::cout << "Player receives a new Risk card!" << std::endl;
 		players[ct]->addCard(gDeck.drawCard());
-	}
+	}*/
 }
 
 ////////  Other  ////////

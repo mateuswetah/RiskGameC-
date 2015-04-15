@@ -1,9 +1,9 @@
 #include "Fortification.h"
 
-Fortification::Fortification(Player* aPlayer)
+Fortification::Fortification()
 {
 	std::cout << "Fortification phase!\n\n";
-	mCurrent = aPlayer;
+	//mCurrent = aPlayer;
 	tOriginStr = "";
 	tDestinationStr = "";
 }
@@ -124,7 +124,7 @@ void Fortification::fortify()
 
 	// List the territories that migrate 
 	std::vector<Territory*> allTerritories = map->getTerritories();		// Map's territories
-	std::vector<Territory*> pTerritories;								// Player's territories
+	std::vector<Territory*> pTerritories = map->getTerritoriesByPlayer(mCurrent->getName());								// Player's territories
 
 	std::vector <std::string> tempOriginStr1;
 	std::vector <std::string> tempDestinationStr1;
@@ -215,4 +215,17 @@ void Fortification::setTDestination(std::string aTerritory)
 {
 	Map *map = Map::getMapInstance();
 	tDestination = map->getTerritoryByName(aTerritory);
+}
+
+void
+Fortification::run(Player* player)
+{
+  mCurrent = player;
+  if (mCurrent->getHasNewTerritory())
+  {
+	  fortify();
+	  // New risk card
+	  std::cout << "Player receives a new Risk card!" << std::endl;
+	  mCurrent->addCard(GameDeck::getGameDeckInstance()->drawCard());
+  }
 }

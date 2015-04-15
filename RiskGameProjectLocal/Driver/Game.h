@@ -11,6 +11,7 @@
 #include <math.h>
 
 #include <stdlib.h>
+#include "../Phases/Phase.h"
 #include "../Phases/Battle.h"
 #include "../Phases/Reinforcement.h"
 #include "../Phases/Fortification.h"
@@ -69,6 +70,8 @@ private:
 	MapViewer* MapObserver;
 	PlayerViewer* PlayerObserver;
 	StatisticsViewer** StatisticsObserver;
+
+	Phase* mPhase;
 
 	GameDeck gDeck;
 };

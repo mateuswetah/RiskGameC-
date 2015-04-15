@@ -21,6 +21,8 @@
 #include "Continent.h"
 #include "../ObservablePattern/Observable.h" // ALREADY IN TERRITORY.H, CONTINENT.H
 #include "../FileIO/MapIO.h"
+#include "../Viewers/StatusNotifier.h"
+#include "../Cards/GameDeck.h"
 
 /* Added to fixe circular dependency problem */
 class Continent;
@@ -76,6 +78,9 @@ public:
 
 	void loadMap(char* filename);
 
+	void 		setStatsNotifier(StatusNotifier* sn){statusNotifier = sn;};
+	StatusNotifier* getStatsNotifier(){return statusNotifier;};
+
 private:
 
 	// SingleTone Instance
@@ -84,6 +89,7 @@ private:
 	// Vector that holds the continents
 	std::vector<Continent*> continents;
 
+	StatusNotifier* statusNotifier;
 	// Name for the picture to be loaded by SMFL
 	std::string fileName;
 };

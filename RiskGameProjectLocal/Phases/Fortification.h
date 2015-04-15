@@ -2,12 +2,13 @@
 
 #include "../Map/Map.h"
 #include "../Player/Player.h"
+#include "Phase.h"
 
-class Fortification
+class Fortification :public Phase
 {
 public:
 	// Constructor
-	Fortification(Player* aPlayer);
+	Fortification();
 	virtual ~Fortification();
 
 	// Setters
@@ -20,6 +21,7 @@ public:
 	void move(std::string origin, std::string destination);
 	std::vector<std::string> createNeighborsStr(std::string name);
 	void fortify();
+	void run(Player* player);
 
 private:
 	Player *mCurrent;
