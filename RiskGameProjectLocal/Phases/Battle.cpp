@@ -276,15 +276,17 @@ Battle::run(Player* player)
 		    "2 - AllOutAttack"<< std::endl <<
 		    "3 - End Turn" << std::endl;
 
-  if (player->getName() == "AI")
+  if (typeid(player).name() == "AIPlayer*")
   {
-  AIPlayer *AI = (AIPlayer*) player;
+    AIPlayer *AI = (AIPlayer*) player;
 
-  choice = AI->decideAttack();
-  std::cout << choice << std::endl;
+    choice = AI->decideAttack();
+    std::cout << choice << std::endl;
   }
-  else
-  std::cin >> choice;
+  else{
+      std::cin.clear();
+    std::cin >> choice;
+  }
   switch (choice)
   {
   case '1':

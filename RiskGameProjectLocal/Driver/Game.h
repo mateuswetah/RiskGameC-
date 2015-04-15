@@ -48,7 +48,11 @@ public:
 	int rollDice();
 	inline void updateTurnStatus();
 	void drawCard();
+
 	bool monitorWins();
+	void monitorDefeat();
+	void setNPlayer(int num);
+	void setPlayers(Player** aPlayers);
 
 private:
 	Map *map;

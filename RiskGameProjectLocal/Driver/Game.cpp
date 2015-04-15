@@ -407,91 +407,26 @@ void Game::battle()
 {
   mPhase = new Battle();
   mPhase->run(players[ct]);
+
+  if (monitorWins())
+  {
+	  std::cout << players[ct]->getName() << " is the winner!" << std::endl;
+	  players[ct]->setHasNewTerritory(false);	// Ignore Fortification
+	  endGame = true; // Exit MainPlay
+	  return; // Exit Battle
+  }
+  else
+  {
+	  std::cout << "No winner yet." << std::endl;
+  }
+
 }
-/*	// Notify Status
-statusNotifier->setStatusMessage("Battle!");
-
-	bool endTurn = false;
-	char choice;
-
-	Battle b;
-
-	while (!endTurn)
-	{
-		std::cout  << "What would you like to do?" << std::endl
-
-				<< "1 - Normal Attack" << std::endl << "2 - AllOutAttack"
-				<< std::endl << "3 - End Turn" << std::endl;
-
-		if (players[ct] == players[0])
-		{
-			choice = '3';
-		}
-		else
-		{
-			std::cin.clear();
-			std::cin >> choice;
-		}
-
-		switch (choice)
-		{
-		case '1':
-			// Notify Status
-		      map->getStatsNotifier()->setStatusMessage("Battle - Normal Attack");
-
-			b.RunBattle(false, players[ct]);
-			break;
-
-		case '2':
-			// Notify Status
-  map->getStatsNotifier()->setStatusMessage("Battle - All Out Attack");
-
-			b.RunBattle(true, players[ct]);
-			break;
-		default:
-			// Notify Status
-  map->getStatsNotifier()->setStatusMessage("Battle - End Turn");
-
-			endTurn = true;
-
-		}
-		std::cin.get();
-
-
-		if (monitorWins())
-		{
-			std::cout << players[ct]->getName() << " is the winner!" << std::endl;
-			players[ct]->setHasNewTerritory(false);	// Ignore Fortification
-			endGame = true; // Exit MainPlay
-			return; // Exit Battle
-		}
-		else
-		{
-			std::cout << "No winner yet." << std::endl;
-		}
-<< map->getTerritories().at(i)->getPlayerOwner()->getName()
-<< std::endl;
-}
-
-	} // End of the Battle Loop
-}
-
-*/
 
 ////////  Fortification  ////////
 void Game::fortification()
 {
 	mPhase = new Fortification();
 	mPhase->run(players[ct]);
-	/*if (players[ct]->getHasNewTerritory())
-	{
-		Fortification f(players[ct]);
-		f.fortify();
-	
-		// New risk card
-		std::cout << "Player receives a new Risk card!" << std::endl;
-		players[ct]->addCard(gDeck.drawCard());
-	}*/
 }
 
 ////////  Other  ////////
@@ -527,5 +462,45 @@ bool Game::monitorWins()
 		}
 	}
 	return winner;
+}
+
+void Game::monitorDefeat()
+{
+	int num = nPlayer;
+
+	for (int i = 0; i < nPlayer; i++)
+	{
+		if (players[i]->getEliminated())
+		{
+			players[i] = NULL;
+			num--;
+		}
+	}
+
+	Player **temp = new Player*[num];
+
+	for (int j = 0; j < nPlayer; j++)
+	{
+		int index = 0;
+		if (players[j] != NULL)
+		{
+			temp[index] = players[j];
+			if (players[j]->getTurnState() == true)
+				ct = index;
+			delete [] players[j];
+		}
+	}
+
+	setNPlayer(num);
+}
+
+void Game::setNPlayer(int num)
+{
+	nPlayer = num;
+}
+
+void Game::setPlayers(Player** aPlayers)
+{
+	players = aPlayers;
 }
 
