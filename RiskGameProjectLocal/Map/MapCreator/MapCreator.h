@@ -12,9 +12,9 @@
 #include "../Continent.h"
 #include "../Territory.h"
 
-#include "../../Viewers/MapViewer.h"
+#include "../MapViewer.h"
 
-#include "../../FileIO/MapIO.h"
+#include "../MapIO/MapIO.h"
 
 #include <SFML/Graphics.hpp>
 #include <string>

@@ -2,23 +2,23 @@
 #define GAME_H_
 
 #include "../Map/Map.h"
-#include "../Viewers/MapViewer.h"
-#include "../Viewers/PlayerViewer.h"
+#include "../Map/MapViewer.h"
+#include "../Map/PlayerViewer.h"
 #include "../Player/Player.h"
-#include "../Viewers/StatisticsViewer.h"
+#include "../Player/StatisticsViewer.h"
 #include "../Player/AIPlayer.h"
 #include "../Cards/GameDeck.h"
+#include "Reinforcement.h"
 #include <math.h>
 
 #include <stdlib.h>
-#include "../Phases/Battle.h"
-#include "../Phases/Reinforcement.h"
-#include "../Phases/Fortification.h"
-#include "../Viewers/StatusNotifier.h"
+#include "../Battle/Battle.h"
+#include "StatusNotifier.h"
 
 #include <SFML/Graphics.hpp>
-#include "../FileIO/GameIO.h"
-#include "../FileIO/GameToMapIO.h"
+#include "Fortification.h"
+#include "../Map/MapIO/GameIO.h"
+#include "../Map/MapIO/GameToMapIO.h"
 #include "../Map/MapCreator/MapCreator.h"
 
 class Game
@@ -39,15 +39,18 @@ public:
 
 	//Main-play
 	void mainPlay();
+
+	//Reinforcement
 	void reinforcement();
+
 	void battle();
+
 	void fortification();
 
 	//Other
 	int rollDice();
 	void updateTurnStatus();
 	void drawCard();
-	bool monitorWins();
 
 private:
 	Map *map;

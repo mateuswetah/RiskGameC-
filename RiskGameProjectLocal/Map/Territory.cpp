@@ -155,10 +155,7 @@ void Territory::printMyNeighbors()
 		std::cerr << "No neighbors here." << std::endl;
 
 	for (int i = 0; i < nNeighbors; i++)
-	{
-		std::cout << neighbors.at(i)->getName() << ", "
-			<< neighbors.at(i)->getPlayerOwner()->getName() << std::endl;
-	}
+		std::cout << this->neighbors.at(i)->getName() << std:: endl;
 
 }
 

@@ -13,8 +13,6 @@ Player::Player()
 	nReinforcement = 0;
 	nWin = 0;
 	this->color = "gray"; // default
-	hasNewTerritory = false;
-	eliminated = false;
 }
 
 Player::Player(std::string color)
@@ -23,7 +21,6 @@ Player::Player(std::string color)
 }
 Player::Player(int n)
 {
-	hasNewTerritory = false;
 	mNumber = n;
 	name = "";
 	turnState = false;
@@ -34,7 +31,6 @@ Player::Player(int n)
 	nReinforcement = 0;
 	nWin = 0;
 	this->color = "green"; // default
-	eliminated = false;
 }
 
 
@@ -82,7 +78,6 @@ bool Player::getTurnState()
 void Player::setNArmy(int a)
 {
 	nArmy = a;
-	notify();
 }
 
 void Player::defineNArmy()
@@ -157,9 +152,6 @@ void Player::defineNTerritory()
 
 	// Assign to nTerritory
 	nTerritory = num;
-
-	if (num == 0)
-		eliminated = true;
 }
 
 int Player::getNTerritory()
@@ -195,7 +187,7 @@ void Player::setHasNewTerritory(bool b)
 {
 	hasNewTerritory = b;
 
-	//notify();
+	notify();
 }
 
 int Player::getNReinforcement()
@@ -206,11 +198,7 @@ int Player::getNReinforcement()
 void Player::defineNCard()
 {
 	nCard = cards.size();
-}
-
-void Player::defineNReinforcement()
-{
-	nReinforcement = getNReinforcement();
+	//	notify();
 }
 
 // Getters
@@ -223,15 +211,12 @@ std::vector<Card*> Player::getCards()
 void Player::setCards(std::vector<Card*> set)
 {
 	cards = set;
-	notify();
 }
 
 // Others
 void Player::addCard(Card* aCard)		// aCard should be define with GameDeck::drawCard() function
 {
 	this->cards.push_back(aCard);
-	//defineNCard();
-	notify();
 }
 
 void Player::removeCard(Card* aCard)
@@ -244,8 +229,6 @@ void Player::removeCard(Card* aCard)
 			break;
 		}
 	}
-	//defineNCard();
-	notify();
 }
 
 void Player::printCards()
@@ -260,9 +243,4 @@ void Player::printCards()
 			std::cout << cards.at(i)->getTypeOfArmyStr() << std::endl;
 		}
 	}
-}
-
-bool Player::getEliminated()
-{
-	return eliminated;
 }
