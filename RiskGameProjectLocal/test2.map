@@ -1,0 +1,11 @@
+[Map]
+author=Emmanuel, Mateus, Sylvie, Sarah
+image=world.bmpp
+
+[Continents]
+America=1
+
+[Territories]
+EUA,243,543,America,Canada
+Canada,455,43,America
+

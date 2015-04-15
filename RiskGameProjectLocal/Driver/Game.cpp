@@ -59,7 +59,7 @@ void Game::menu()
 
 			break;
 		case 2: // Loading existing game
-			std::cout << "Type the name of the game you want to load. Ex: 'Game.gsv' " << std::endl;
+			std::cout << "Type the name of the game you want to load. Ex: 'Game3.gsv' " << std::endl;
 			std::cin.get();
 			std::getline(std::cin, mapFileName);
 
@@ -384,6 +384,9 @@ void Game::mainPlay()
 
 		// Battle
 		battle();
+
+		// Fortification
+		fortification();
 
 		// Update
 		ct = (ct + 1) % nPlayer;

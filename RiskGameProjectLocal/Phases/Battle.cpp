@@ -116,6 +116,17 @@ Battle::RunBattle (bool allIn, Player* player)
 
 			std::cout<<"Keep Attacking? (y/n)"<<std::endl;
 
+			if (typeid(player).name() == "AIPlayer*")
+			{
+				AIPlayer *AI = (AIPlayer*)player;
+
+				choice = AI->decideKeepAttacking();
+
+				std::cout<<choice<<std::endl;
+			}
+			else
+				std::cin >> choice;
+
 			if(choice == 'n')
 			{
 				keepAttacking = false;
