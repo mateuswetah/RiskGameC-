@@ -122,16 +122,16 @@ void Game::graphics(std::string mapFileName)
 
 	if (mapBackground.getSize().x >= 900)
 		window.create(
-		sf::VideoMode(mapBackground.getSize().x,
-		mapBackground.getSize().y + 100), "RISK! - " + mapFileName ,
-		sf::Style::Default, settings);
+				sf::VideoMode(mapBackground.getSize().x,
+						mapBackground.getSize().y + 100), "RISK! - " + mapFileName ,
+						sf::Style::Default, settings);
 	else
 		window.create(
-		sf::VideoMode(
-		mapBackground.getSize().x
-		+ (900 - mapBackground.getSize().x),
-		mapBackground.getSize().y + 100), "RISK! - " + mapFileName,
-		sf::Style::Default, settings);
+				sf::VideoMode(
+						mapBackground.getSize().x
+						+ (900 - mapBackground.getSize().x),
+						mapBackground.getSize().y + 100), "RISK! - " + mapFileName,
+						sf::Style::Default, settings);
 
 	window.clear(sf::Color(45, 45, 45));
 
@@ -141,7 +141,7 @@ void Game::graphics(std::string mapFileName)
 
 	// Coloring the continents (max 8 colors)
 	std::string c[] =
-		{ "blue", "red", "green", "black", "cyan", "magenta", "yellow", "gray" };
+	{ "blue", "red", "green", "black", "cyan", "magenta", "yellow", "gray" };
 
 	for (unsigned int i = 0; i < map->getContinents().size(); i++)
 	{
@@ -196,7 +196,7 @@ void Game::createPlayer()
 			players[i]->setName(name);
 			players[i]->setColor(c[i]);
 		}
-		
+
 		bottomBar[i].create(window.getSize().x/6, 100); // Creates a RenderTexture for the player in the bottomBar
 		StatisticsObserver[i] = new StatisticsViewer(players[i], bottomBar[i],
 				window); // Creates the Observer for this player, for displaying in the bottom bar
@@ -206,8 +206,8 @@ void Game::createPlayer()
 		totArmy += assignArmy() * nPlayer;
 
 		std::cout << players[i]->getName()
-			<< " is now the player of color " << players[i]->getColor() << " and will receive an army of "
-			<< assignArmy() << " infantries.\n\n";
+					<< " is now the player of color " << players[i]->getColor() << " and will receive an army of "
+					<< assignArmy() << " infantries.\n\n";
 
 	}
 
@@ -254,22 +254,22 @@ void Game::placeArmy()
 		while (players[ct]->getNReinforcement() > 0)
 		{
 			std::cout << players[ct]->getName() << ", "
-				<< players[ct]->getNReinforcement()
-				<< " reinforcements remaining, select a country.\n";
+					<< players[ct]->getNReinforcement()
+					<< " reinforcements remaining, select a country.\n";
 			std::string territory;
 			getline(std::cin, territory);
 
 			if (map->getTerritoryByName(territory)->getPlayerOwner()->getName()
-				== players[ct]->getName())
+					== players[ct]->getName())
 			{
 				map->getTerritoryByName(territory)->setAmountOfArmies(
-					map->getTerritoryByName(territory)->getAmountOfArmies()
-					+ 1);
+						map->getTerritoryByName(territory)->getAmountOfArmies()
+						+ 1);
 				players[ct]->setNReinforcement(
-					players[ct]->getNReinforcement() - 1);
+						players[ct]->getNReinforcement() - 1);
 				std::cout << territory << " has now "
-					<< map->getTerritoryByName(territory)->getAmountOfArmies()
-					<< " armies.\n";
+						<< map->getTerritoryByName(territory)->getAmountOfArmies()
+						<< " armies.\n";
 			}
 		}
 		ct = (ct + 1) % nPlayer;
@@ -280,7 +280,7 @@ void Game::placeArmy()
 
 	updateTurnStatus();
 
-	}
+}
 
 void Game::pickRandom()
 {
@@ -309,7 +309,7 @@ void Game::pickRandom()
 		players[ct]->winTerritory();
 
 		std::cout << vt.at(rd)->getName() << " belongs to: "
-			<< players[ct]->getName() << std::endl;
+				<< players[ct]->getName() << std::endl;
 
 		vt.erase(vt.begin() + rd);
 
@@ -321,14 +321,6 @@ void Game::pickRandom()
 
 		updateTurnStatus();
 	}
-
-	GameIO gio;
-	gio.saveGameInfo("gameSave.gsv");
-	std::cout
-		<< "If you desire to change any information from the current game state, edit the gameSave.gsv file and press enter.";
-	std::cin.get();
-	std::cin.get();
-	gio.loadGameInfo("gameSave.gsv");
 }
 
 void Game::turnOrder()
@@ -359,29 +351,12 @@ void Game::turnOrder()
 	std::cout << players[playerInd]->getName() << " plays first." << std::endl;
 	ct = playerInd;
 	first = playerInd;
-	/*for (int i = 0; i < nPlayer; i++)
-	{
-	temp[i] = *players[ct%nPlayer];
-	//	std::cout << "Temp " << i << " is " << players[ct%nPlayer].getName() << std::endl;
-	ct++;
-	}
-	players = &temp;*/
+
 	ct = (first) % nPlayer;
 
 	updateTurnStatus();
 
 }
-
-/* Win Test */
-/*std::vector<Territory*> territory = map->getTerritories();
-for (int i = 0; i < territory.size(); i++)
-{
-	territory[i]->setPlayerOwner(players[ct]);
-	std::cout << territory.at(i)->getName() << " "
-
-		<< territory->getPlayerOwner()->getName()
-		<< std::endl;
-}																*/
 
 ///////// Main Play ////////
 
@@ -401,55 +376,14 @@ void Game::mainPlay()
 	while (!endGame && test > 0)
 	{
 		players[ct]->setHasNewTerritory(false); // Reset to false
-		/* Test Battle */
-	/*	map->getTerritoryByName("Ontario")->setAmountOfArmies(3);
-		map->getTerritoryByName("Quebec")->setPlayerOwner(players[0]);
-		players[0]->addCard(gDeck.drawCard());
-
-		map->getTerritoryByName("Quebec")->setAmountOfArmies(50);
-		map->getTerritoryByName("Quebec")->setPlayerOwner(players[1]);
-		players[1]->addCard(gDeck.drawCard());
-		players[1]->addCard(gDeck.drawCard());*/
-		/* End test conditions */
-
 
 		std::cout << players[ct]->getName() << "'s turn!\n\n";
 
 		// Reinforcement
 		reinforcement();
-		std::cout << "outside reinforcement" << std::endl;
+
 		// Battle
-
-
 		battle();
-
-		// Display stats [BEFORE]
-	/*	std::cout << "Stats after." << std::endl;
-		std::cout << "Card." << players[ct]->getNCard() << std::endl;
-		std::cout << map->getTerritoryByName("Siam")->getAmountOfArmies() << std::endl;
-		std::cout << map->getTerritoryByName("India")->getAmountOfArmies() << std::endl;
-		std::cout << map->getTerritoryByName("Mongolia")->getAmountOfArmies() << std::endl;
-
-		// Fortification
-		map->getTerritoryByName("Siam")->setPlayerOwner(players[0]);
-		map->getTerritoryByName("Siam")->setAmountOfArmies(2);
-
-		map->getTerritoryByName("India")->setPlayerOwner(players[0]);
-		map->getTerritoryByName("India")->setAmountOfArmies(5);
-
-		map->getTerritoryByName("Mongolia")->setPlayerOwner(players[0]);
-		map->getTerritoryByName("Mongolia")->setAmountOfArmies(2);
-
-		players[0]->setHasNewTerritory(true);
-
-		fortification();
-
-		// Display stats [AFTER]
-		std::cout << "Stats after." << std::endl;
-		std::cout << "Card." << players[ct]->getNCard() << std::endl;
-		std::cout << map->getTerritoryByName("Siam")->getAmountOfArmies() << std::endl;
-		std::cout << map->getTerritoryByName("India")->getAmountOfArmies() << std::endl;
-		std::cout << map->getTerritoryByName("Mongolia")->getAmountOfArmies() << std::endl;*/
 
 		// Update
 		ct = (ct + 1) % nPlayer;
@@ -465,7 +399,7 @@ void Game::reinforcement()
 	// Notify Status
 	statusNotifier->setStatusMessage("Reinforcement");
 
-	Reinforcement rPhase(players[0], cardReinforcement);
+	Reinforcement rPhase(players[ct], cardReinforcement);
 	rPhase.reinforce();
 	cardReinforcement = rPhase.updateCardBonus();
 }
@@ -477,74 +411,66 @@ void Game::battle()
 	// Notify Status
 	statusNotifier->setStatusMessage("Battle!");
 
-bool endTurn = false;
-char choice;
+	bool endTurn = false;
+	char choice;
 
-Battle b;
+	Battle b;
 
-while (!endTurn)
-{
+	while (!endTurn)
+	{
 		std::cout  << "What would you like to do?" << std::endl
 
-<< "1 - Normal Attack" << std::endl << "2 - AllOutAttack"
-<< std::endl << "3 - End Turn" << std::endl;
+				<< "1 - Normal Attack" << std::endl << "2 - AllOutAttack"
+				<< std::endl << "3 - End Turn" << std::endl;
 
-if (players[ct]->getName() == "AI")
-{
-AIPlayer *AI = (AIPlayer*) players[ct];
+		if (players[ct] == players[0])
+		{
+			choice = '3';
+		}
+		else
+		{
+			std::cin.clear();
+			std::cin >> choice;
+		}
 
-choice = AI->decideAttack();
-std::cout << choice << std::endl;
-}
-else
-std::cin >> choice;
-switch (choice)
-{
-case '1':
+		switch (choice)
+		{
+		case '1':
 			// Notify Status
 			statusNotifier->setStatusMessage("Battle - Normal Attack");
 
-b.RunBattle(false, players[ct]);
-break;
+			b.RunBattle(false, players[ct]);
+			break;
 
-case '2':
+		case '2':
 			// Notify Status
 			statusNotifier->setStatusMessage("Battle - All Out Attack");
 
-b.RunBattle(true, players[ct]);
-break;
-default:
+			b.RunBattle(true, players[ct]);
+			break;
+		default:
 			// Notify Status
 			statusNotifier->setStatusMessage("Battle - End Turn");
 
-endTurn = true;
+			endTurn = true;
 
-}
-std::cin.get();
-
-	/*	for (unsigned int i = 0; i < map->getTerritories().size(); i++)
-{
-			std::cout  << map->getTerritories().at(i)->getName() << " "
-
-<< map->getTerritories().at(i)->getPlayerOwner()->getName()
-<< std::endl;
-}*/
+		}
+		std::cin.get();
 
 
+		if (monitorWins())
+		{
+			std::cout << players[ct]->getName() << " is the winner!" << std::endl;
+			players[ct]->setHasNewTerritory(false);	// Ignore Fortification
+			endGame = true; // Exit MainPlay
+			return; // Exit Battle
+		}
+		else
+		{
+			std::cout << "No winner yet." << std::endl;
+		}
 
-if (monitorWins())
-{
-	std::cout << players[ct]->getName() << " is the winner!" << std::endl;
-	players[ct]->setHasNewTerritory(false);	// Ignore Fortification
-	endGame = true; // Exit MainPlay
-	return; // Exit Battle
-}
-else
-{
-	std::cout << "No winner yet." << std::endl;
-}
-
-} // End of the Battle Loop
+	} // End of the Battle Loop
 }
 
 
@@ -573,10 +499,10 @@ int Game::rollDice()
 void Game::updateTurnStatus()
 {
 	for (int i = 0; i < nPlayer; i++)
-{
+	{
 		if (i == ct)
 			players[i]->setTurnState(true);
-else
+		else
 			players[i]->setTurnState(false);
 	}
 }

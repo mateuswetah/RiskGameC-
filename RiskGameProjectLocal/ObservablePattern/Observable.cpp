@@ -25,10 +25,13 @@ void Observable::detach(Observer* anObserver)
 
 void Observable::notify()
 {
+	std::list<Observer*>::iterator i;
 
-	for(std::list<Observer*>::iterator i = this->observers.begin(); i != this->observers.end(); ++i)
+	if (this->observers.size() > 0)
 	{
-		(*i)->update();
-		//std::cout << "Notified!" << std::endl;
+		for(std::list<Observer*>::iterator i = this->observers.begin(); i != this->observers.end(); ++i)
+		{
+			(*i)->update();
+		}
 	}
 }

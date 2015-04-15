@@ -45,7 +45,7 @@ public:
 
 	//Other
 	int rollDice();
-	void updateTurnStatus();
+	inline void updateTurnStatus();
 	void drawCard();
 	bool monitorWins();
 

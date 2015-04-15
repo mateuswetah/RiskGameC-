@@ -21,6 +21,8 @@
 #include <algorithm>
 #include <stdlib.h>
 #include <functional>
+#include <typeinfo>
+#include <cctype>
 
 class Battle
 {

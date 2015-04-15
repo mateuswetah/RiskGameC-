@@ -137,7 +137,7 @@ void MapCreator::mapCreatorMenu()
 			std::getline(std::cin, this->fileName);
 
 			MapIO* mio = new MapIO();
-			mio->loadMapInfo(this->fileName);
+			mio->saveMapInfo(this->fileName);
 
 			exit = true;
 
